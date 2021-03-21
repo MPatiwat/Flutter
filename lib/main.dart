@@ -79,7 +79,7 @@ class _TitleSectionState extends State<TitleSection> {
         Row(
           children: [
             IconButton(
-          icon: (_isCheck ? Icon(Icons.star, color: Colors.red):Icon(Icons.star_border, color: Colors.red,)),
+          icon: (_isFav ? Icon(Icons.star, color: Colors.red):Icon(Icons.star_border, color: Colors.red,)),
           onPressed: _incrementCounter
         ),
         Text('$_count')
