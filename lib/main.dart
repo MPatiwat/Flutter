@@ -44,18 +44,18 @@ class TitleSection extends StatefulWidget {
 
 class _TitleSectionState extends State<TitleSection> {
   double _count = 41;
-  bool _isCheck = true;
+  bool _isFav = true;
 
   void _incrementCounter() {
     setState(() {
-      if(_isCheck){
+      if(_isFav){
         _count -= 1;
-        _isCheck = false;
+        _isFav = false;
         EasyLoading.showSuccess('Not Favorite');
       }
       else{
           _count += 1;
-        _isCheck = true;
+        _isFav = true;
         EasyLoading.showSuccess('Favorite');
 
       }
