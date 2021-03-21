@@ -15,8 +15,9 @@ class MyApp extends StatelessWidget {
             children: [
               Image.asset(
                 'lake.jpg',
-                width: 900,
-                height: 380,
+                width: 600,            
+                height: 240,
+                fit: BoxFit.cover
               ),
               Container(
                 height : 15
@@ -46,6 +47,7 @@ class _TitleSectionState extends State<TitleSection> {
 
   @override
   Widget build(BuildContext context) {
+    padding: const EdgeInsets.all(32)
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children:[
@@ -148,8 +150,9 @@ class TextSection extends StatelessWidget {
              'lake, which warms to 20 degrees Celsius in the' 
              'summer. Activities enjoyed here include rowing, and'
              'riding the summer toboggan run',
+             softWrap: true,
               style: TextStyle(
-                fontSize: 14.0,
+                fontSize: 20.0,
                 height: 1.5 //You can set your custom height here
               )
             ),
