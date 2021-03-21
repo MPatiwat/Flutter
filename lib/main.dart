@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
             ],
           )
         )
-      ) 
+      ),
+      builder: EasyLoading.init(), 
     );
   }
 }
@@ -41,13 +43,28 @@ class TitleSection extends StatefulWidget {
 }
 
 class _TitleSectionState extends State<TitleSection> {
-  double _count = 4.1;
+  double _count = 41;
+  bool _isCheck = true;
 
+  void _incrementCounter() {
+    setState(() {
+      if(_isCheck){
+        _count -= 1;
+        _isCheck = false;
+        EasyLoading.showSuccess('Not Favorite');
+      }
+      else{
+          _count += 1;
+        _isCheck = true;
+        EasyLoading.showSuccess('Favorite');
+
+      }
+    });
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    padding: const EdgeInsets.all(32)
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children:[
@@ -62,12 +79,8 @@ class _TitleSectionState extends State<TitleSection> {
         Row(
           children: [
             IconButton(
-          icon: const Icon(Icons.star, color: Colors.red),
-          onPressed: () {
-            setState(() {
-              _count += 0.5;
-            });
-          },
+          icon: (_isCheck ? Icon(Icons.star, color: Colors.red):Icon(Icons.star_border, color: Colors.red,)),
+          onPressed: _incrementCounter
         ),
         Text('$_count')
             
@@ -79,61 +92,84 @@ class _TitleSectionState extends State<TitleSection> {
   }
 }
 
-class ButtonSection extends StatelessWidget {
+class ButtonSection extends StatefulWidget {
   const ButtonSection({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Column(
-          children: [
-            Container(
-                height : 15
-            ),
-            IconButton(
-            
-              icon: const Icon(Icons.phone, color: Colors.blue),
-              ),
-            Text('Call'),
-            Container(
-                height : 15
-              )
-          ],
-        ),
-        Column(
-          children: [
-          Container(
-                height : 15
-            ),
-            IconButton(
-              icon: const Icon(Icons.near_me, color: Colors.blue),
-              ),
-            Text('Route'),
-            Container(
-                height : 15
-              )
-          ],
-        ),
-        Column(
-          children: [
-            Container(
-                height : 15
-            ),
-            IconButton(
-              icon: const Icon(Icons.share, color: Colors.blue),
-              ),
-            Text('Share'),
-            Container(
-                height : 15
-              )
-          ],
-        )
-      ],
-    );
-  }
+  _ButtonSectionState createState() => _ButtonSectionState();
 }
+
+class _ButtonSectionState extends State<ButtonSection> {
+  void _ShowCall() {
+    setState(() {
+      EasyLoading.showSuccess('CALL Success');
+    });
+  }
+  void _ShowRoute() {
+    setState(() {
+      EasyLoading.showSuccess('Route Success');
+    });
+  }
+  void _ShowShare() {
+    setState(() {
+      EasyLoading.showSuccess('Share Success');
+    });
+  }
+    @override
+    Widget build(BuildContext context) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
+            children: [
+              Container(
+                  height : 15
+              ),
+              IconButton(
+                icon: const Icon(Icons.phone, color: Colors.blue),
+                onPressed: _ShowCall
+                ),
+              Text('Call'),
+              Container(
+                  height : 15
+                )
+            ],
+          ),
+          Column(
+            children: [
+            Container(
+                  height : 15
+              ),
+              IconButton(
+                icon: const Icon(Icons.near_me, color: Colors.blue),
+                onPressed: _ShowRoute
+                ),
+              Text('Route'),
+              Container(
+                  height : 15
+                )
+            ],
+          ),
+          Column(
+            children: [
+              Container(
+                  height : 15
+              ),
+              IconButton(
+                icon: const Icon(Icons.share, color: Colors.blue),
+                onPressed: _ShowShare
+                ),
+              Text('Share'),
+              Container(
+                  height : 15
+                )
+            ],
+          )
+        ],
+      );
+    }
+  }
+  
 class TextSection extends StatelessWidget {
   const TextSection({Key key}) : super(key: key);
 
@@ -152,8 +188,8 @@ class TextSection extends StatelessWidget {
              'riding the summer toboggan run',
              softWrap: true,
               style: TextStyle(
-                fontSize: 20.0,
-                height: 1.5 //You can set your custom height here
+                fontSize: 14.0,
+                height: 1.5 
               )
             ),
               constraints: BoxConstraints(
